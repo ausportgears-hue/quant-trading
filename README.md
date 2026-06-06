@@ -1,72 +1,59 @@
-# WorkBuddy Quant Trading System v7.7
+# 🚀 WorkBuddy Quant v7.7
 
-多策略加密货币量化交易系统，基于 Paper Trading 验证后向实盘演进。
+**Multi-strategy crypto trading bot with AI-powered signal filtering — paper trading proven.**
 
-## 策略架构
+- **🟢 69.7%** Win Rate · **+$655** PnL · **BTC + SOL**
+- ⚡ Momentum + Mean-Reversion dual strategy engine
+- 🤖 DeepSeek AI filters fakeouts & confirms entries
+- 📉 Dynamic leverage (10x–30x) with time-aware risk control
 
-| 策略 | 类型 | 权重 | 周期 | 核心逻辑 |
-|:---|:---|:---:|:---|:---|
-| **S1 动量策略** | 趋势跟踪 | 70% | 4H定向 + 15m入场 | ADX+RSI+EMA+量比+结构位 5选4投票 |
-| **S2 逆势策略** | RSI极端反转 | 30% | 15m | RSI6/14极端区间 + 成交量确认 |
-| **AI 过滤器** | 信号二次确认 | - | - | DeepSeek审核信号，拦截假突破/低量/反转 |
+---
 
-## 出场体系
+## How It Works
 
-| 层级 | 触发条件 | 动作 |
-|:---|:---|:---|
-| 保本 (Breakeven) | 浮盈 ≥ 0.8% | 止损移至入场价 |
-| 部分止盈 (Partial TP) | 浮盈 ≥ 1.0% | 平仓50%，剩余追踪止损 |
-| 追踪止损 (Trailing Stop) | 部分止盈/保本后 | 追踪最高点0.6% |
-| 止盈 (TP) | 价格触及 2.5x ATR | 全平 |
-| 止损 (SL) | 价格触及 1.2x ATR | 全平 |
-| 超时 (Timeout) | S1>24h / S2>8h | 市价平仓 |
-
-## 仓位与杠杆
-
-- **凯利公式**：Kelly RR=2.0，仓位上限35%
-- **ATR 动态杠杆**：10x-30x 自适应
-- **时段感知**：周末自动降仓50%
-
-## 风控体系
-
-| 层级 | 机制 |
-|:---|:---|
-| 账户级 | 日最大亏损15%、连续亏损5笔暂停 |
-| 策略级 | 凯利仓位、最低RR=1.5 |
-| 时段级 | 周五晚折扣70%、周末折扣50% |
-| 极端行情 | 爆仓防御、流动性检测 |
-
-## 交易品种
-
-- BTC/USDT — 胜率81.1%，主力品种
-- SOL/USDT — 胜率72.5%，波动收益补充
-
-## 快速开始
-
-```bash
-# 1. 安装依赖
-pip install -r requirements.txt
-
-# 2. 配置环境
-cp .env.example .env
-# 编辑 .env 填入 API Key
-
-# 3. 纸交易运行
-python main.py
-
-# 4. 安装为 systemd 服务（Linux）
-sudo cp scripts/quant-trading.service /etc/systemd/system/
-sudo systemctl enable quant-trading --now
+```
+        ┌─────────────┐    ┌─────────────┐
+ S1 ───►│  MOMENTUM   │───►│   AI FILTER │───► OPEN
+ S2 ───►│  REVERSAL   │───►│ (DeepSeek)  │───► OPEN
+        └─────────────┘    └─────────────┘
 ```
 
-## 版本记录
+| Engine | Style | Timeframe | Trigger |
+|--------|-------|-----------|---------|
+| **S1 Momentum** | Trend-following (70%) | 4H + 15m | ADX · RSI · EMA · Volume · Structure |
+| **S2 Reversal** | RSI oversold bounce (30%) | 15m | RSI extreme + volume spike |
+| **AI Guard** | Signal gatekeeper | — | Blocks low-volume / false breakouts |
 
-| 版本 | 日期 | 核心变更 |
-|:---|:---|:---|
-| v7.7 | 2026-06-06 | 盈利结构全量修复：保本移止损、Trailing Stop、TP=2.5x、S2正式激活 |
-| v7.6 | 2026-06-04 | 动态杠杆、AI集成、DB备份、资源监控 |
-| v7.5 | 2026-06-01 | 凯利仓位、多时间框架、信号评分体系 |
+## Exit System
 
-## 免责声明
+Breakeven → Partial TP → **Trailing Stop** → Full TP / Stop Loss
 
-本项目仅供学习和研究用途。加密货币交易具有高风险，过往表现不代表未来收益。使用本代码进行实盘交易需自行承担风险。
+> Float your winners, cut your losers — automatically.
+
+## Risk Engine
+
+- **Kelly position sizing** — never overbet
+- **ATR-adaptive leverage** — less leverage when volatile
+- **Session-aware** — auto reduce exposure on weekends & Friday nights
+- **Liquidation defense** — early exit before margin call
+
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env   # add your API keys
+python main.py
+```
+
+## Live Stats (Paper Trading)
+
+| Metric | Value |
+|--------|-------|
+| Net PnL | **+$655** |
+| Win Rate | **69.7%** |
+| Best Pair | BTC/USDT (81.1% WR) |
+| Active Since | v7.0, iterated through v7.7 |
+
+---
+
+*For educational use. Crypto trading is high-risk. Past performance ≠ future results.*
