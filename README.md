@@ -1,8 +1,7 @@
 # 🚀 WorkBuddy Quant v7.7
 
-**Multi-strategy crypto trading bot with AI-powered signal filtering — paper trading proven.**
+**Multi-strategy crypto trading bot with AI-powered signal filtering.**
 
-- **🟢 69.7%** Win Rate · **+$655** PnL · **BTC + SOL**
 - ⚡ Momentum + Mean-Reversion dual strategy engine
 - 🤖 DeepSeek AI filters fakeouts & confirms entries
 - 📉 Dynamic leverage (10x–30x) with time-aware risk control
@@ -44,15 +43,6 @@ pip install -r requirements.txt
 cp .env.example .env   # add your API keys
 python main.py
 ```
-
-## Live Stats (Paper Trading)
-
-| Metric | Value |
-|--------|-------|
-| Net PnL | **+$655** |
-| Win Rate | **69.7%** |
-| Best Pair | BTC/USDT (81.1% WR) |
-| Active Since | v7.0, iterated through v7.7 |
 
 ---
 
