@@ -1,0 +1,48 @@
+# 敏感信息 — 绝不提交
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# 虚拟环境
+venv/
+.venv/
+env/
+
+# 数据文件
+data/
+*.db
+*.sqlite
+*.sqlite3
+adaptive_state*.json
+
+# 运行时
+*.log
+*.lock
+/tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 备份文件
+*.bak
+*.bak.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 压缩包
+*.tar.gz
+*.zip
